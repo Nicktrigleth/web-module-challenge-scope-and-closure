@@ -30,11 +30,12 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+  counter 1 declares the variable count in the function which means it is function scoped, counter 2 declares the variable in the glabol which means it is global scoped!
   2. Which of the two uses a closure? How can you tell?
-  
+  counter1, becuase it has return function, because the variable is declared inside the function!
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+  counter1 is preferred for when i want private variables since there function scoped they cant be used but within the function, counter 2 is preffered when i want to use my variable for if i want to use it later on.
 */
 
 // counter1 code
@@ -64,10 +65,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+    return Math.floor(Math.random() * 3);
 }
-
+console.log('task 2:', inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -83,10 +84,19 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(callback, innings){
+  let homeScore = 0;
+  let awayScore = 0;
+  for(let i = 0; i < innings; i++) {
+    homeScore = homeScore + callback();
+    awayScore = awayScore + callback();
+  }
+  return {
+    Home: homeScore,
+    Away: awayScore,
+  }
 }
-
+console.log('task 3:', finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -101,10 +111,13 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-
+function getInningScore(callback) {
+  return {
+    Home: callback(),
+    Away: callback()
+  }
 }
+console.log('task 3:', getInningScore(inning));
 
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
